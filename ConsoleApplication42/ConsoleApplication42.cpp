@@ -11,6 +11,7 @@ struct taskList {
     int size;
 };
 
+
 void readf(struct taskList* theme, int th) {
     int n1 = 20;
     int count = 0;
@@ -19,9 +20,8 @@ void readf(struct taskList* theme, int th) {
     switch (th)
     {
     case 1:
-
         FILE * f1;
-        fopen_s(&f1, "C:/Users/ADMIN/source/repos/ConsoleApplication42/ConsoleApplication42/f.quest.txt", "r");
+        fopen_s(&f1, "C:/Users/ADMIN/source/repos/ConsoleApplication42/ConsoleApplication42/f.quest.txt", "r");    
         if (!f1) {
             printf("Файл не найден.\n");
         }
@@ -502,9 +502,17 @@ void del_question(struct taskList* theme, int th, int num) {
 }
 
 void print_que(struct taskList* theme, int num) {
-    printf("Вопрос %d: %s\n", num + 1, theme->tasks[num].quest);
-    for (int j = 0; j < 4; j++) {
-        printf("%d. %s\n", j + 1, theme->tasks[num].ans[j]);
+    if (num != theme->size - 1) {
+        printf("Вопрос %d: %s\n", num + 1, theme->tasks[num].quest);
+        for (int j = 0; j < 4; j++) {
+            printf("%d. %s\n", j + 1, theme->tasks[num].ans[j]);
+        }
+    }
+    else {
+        printf("Вопрос %d: %s\n\n", num + 1, theme->tasks[num].quest);
+        for (int j = 0; j < 4; j++) {
+            printf("%d. %s\n\n", j + 1, theme->tasks[num].ans[j]);
+        }
     }
 }
 
@@ -519,27 +527,27 @@ void edit_question(struct taskList* theme, int num) {
         case 0:
             printf("Ввод: ");
             gets_s(theme->tasks[num].quest);
-            strcat_s(theme->tasks[num].quest, add_line);
+            if (num != theme->size-1){ strcat_s(theme->tasks[num].quest, add_line); }
             break;
         case 1:
             printf("Ввод: ");
             gets_s(theme->tasks[num].ans[0]);
-            strcat_s(theme->tasks[num].ans[0], add_line);
+            if (num != theme->size-1) { strcat_s(theme->tasks[num].ans[0], add_line); }
             break;
         case 2:
             printf("Ввод: ");
             gets_s(theme->tasks[num].ans[1]);
-            strcat_s(theme->tasks[num].ans[1], add_line);
+            if (num != theme->size-1){ strcat_s(theme->tasks[num].ans[1], add_line); }
             break;
         case 3:
             printf("Ввод: ");
             gets_s(theme->tasks[num].ans[2]);
-            strcat_s(theme->tasks[num].ans[2], add_line);
+            if (num != theme->size-1) { strcat_s(theme->tasks[num].ans[2], add_line); }   
             break;
         case 4:
             printf("Ввод: ");
             gets_s(theme->tasks[num].ans[3]);
-            strcat_s(theme->tasks[num].ans[3], add_line);
+            if (num != theme->size-1) { strcat_s(theme->tasks[num].ans[3], add_line); }
             break;
         case 5: printf("Выход из режима редактирования.\n\n"); break;
         default: printf("Некорректный ввод. Повторите попытку.\n\n"); break;
